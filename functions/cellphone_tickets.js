@@ -13,7 +13,7 @@ exports.handler = async (context, event, callback) => {
     };
       
   console.log(event);
-  const data = await got.get('https://vfb-demo.zendesk.com/api/v2/users/search?query=' + event.user_number, headers);
+  const data = await got.get(context.ZENDESK_URL + '/api/v2/users/search?query=' + event.user_number, headers);
   const jsondata = JSON.parse(data.body);
   const user = jsondata.users[0];
   console.log(jsondata, user);
@@ -24,7 +24,7 @@ exports.handler = async (context, event, callback) => {
   }
   
   // Get tickets
-  const tickets = await got.get('https://vfb-demo.zendesk.com/api/v2/users/' + user.id + '/tickets/requested', headers);
+  const tickets = await got.get(context.ZENDESK_URL + '/api/v2/users/' + user.id + '/tickets/requested', headers);
   let ticketsJson = JSON.parse(tickets.body);
   console.log('ticketsJson', ticketsJson);
   return callback(null, {user, ...ticketsJson});

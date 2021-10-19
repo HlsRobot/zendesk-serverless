@@ -5,7 +5,7 @@ exports.handler = function(context, event, callback) {
     // Here's an example of setting up some TWiML to respond to with this function
       let client = context.getTwilioClient();
     client.messages
-        .create({from: 'VfB Shop', body: 'Your ticket confirmation: \n\nTicket id: ' + event.ticket_id + ' \n\nTicket Subject: ' + event.subject, to: event.phone})
+        .create({from: '{sender}', body: 'Your ticket confirmation: \n\nTicket id: ' + event.ticket_id + ' \n\nTicket Subject: ' + event.subject, to: event.phone})
         .then(message => {
           console.log(message.sid)
           return callback(null, message);

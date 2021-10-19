@@ -11,7 +11,7 @@ exports.handler = function(context, event, callback) {
   console.log('Ticket subject: ' + ticket_subject);
   
   got
-    .post('https://vfb-demo.zendesk.com/api/v2/tickets', {
+    .post(context.ZENDESK_URL + '/api/v2/tickets', {
       json: {
         ticket: {
           comment: {

@@ -8,7 +8,7 @@ exports.handler = function(context, event, callback) {
   let response = new Twilio.Response();
   
   got
-    .get('https://vfb-demo.zendesk.com/api/v2/tickets/' + event.ticket_id, {
+    .get(context.ZENDESK_URL + '/api/v2/tickets/' + event.ticket_id, {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
